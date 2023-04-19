@@ -1,3 +1,5 @@
+## This is a fork for AtomRP -> Original repository: [TomLaVachette/svmod](https://github.com/TomLaVachette/svmod)
+
 # Simple Vehicle Mod for Garry's Mod
 
 SVMod is a free addon that adds features to vehicles.
