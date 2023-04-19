@@ -34,12 +34,17 @@ function ENT:Initialize()
 				return
 			end
 
+			local maxFuel = veh:SV_GetMaxFuel()
+			local fuel = veh:SV_GetFuel()
+			local nextFuel = math.min(fuel + maxFuel * 0.21, maxFuel)
+			local gotAdded = nextFuel - fuel
+			
 			local function callback()
-				veh:SV_SetFuel(veh:SV_GetFuel() + veh:SV_GetMaxFuel() * 0.21)
+				veh:SV_SetFuel(nextFuel)
 				veh:SV_SendFuel(self.Player)
 			end
 
-			local result = hook.Run("SV_PayFuelPump", self.Player, self.Price)
+			local result = hook.Run("SV_PayFuelPump", self.Player, self.Price, gotAdded)
 
 			if result == true then
 				callback()
