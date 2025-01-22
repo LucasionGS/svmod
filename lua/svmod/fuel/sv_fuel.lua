@@ -34,6 +34,8 @@ function SVMOD.Metatable:SV_SetFuel(value)
 
 		hook.Run("SV_OutOfFuel", veh)
 	end
+
+	hook.Run("SV_FuelChange", veh, veh:SV_GetFuel())
 end
 
 -- Sets the vehicle maximum fuel in liters.
@@ -103,6 +105,7 @@ hook.Add("PlayerEnteredVehicle", "SV_Fuel_StartFuelConsumption", function(ply, v
 		end
 
 		veh.SV_LastPosition = veh:GetPos()
+		hook.Run("SV_FuelChange", veh, veh:SV_GetFuel())
 	end)
 end)
 

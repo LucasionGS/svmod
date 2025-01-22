@@ -199,6 +199,7 @@ hook.Add("SV_LoadVehicle", "SV_InitCrashDamageHook", function(veh)
 		ent:SV_DealDamageToWheel(nearestWheelID, totalDamage * 0.5 * SVMOD.CFG.Damage.WheelCollisionMultiplier)
 
 		ent:EmitSound("physics/metal/metal_barrel_impact_hard" .. math.random(1, 3) .. ".wav")
+		hook.Run("SV_VehicleDamaged", ent, ent:SV_GetHealth())
 	end)
 end)
 
@@ -252,6 +253,8 @@ hook.Add("EntityTakeDamage", "SV_VehicleDamage", function(ent, dmg)
 		ent:SV_SetHealth(ent:SV_GetHealth() - totalDamage * 0.8)
 		ent:SV_DealDamageToWheel(nearestWheelID, totalDamage * 0.2 * SVMOD.CFG.Damage.WheelShotMultiplier)
 	end
+
+	hook.Run("SV_VehicleDamaged", ent, ent:SV_GetHealth())
 end)
 
 hook.Add("SV_PlayerLeaveVehicle", "SV_DealDamageOnLeave", function(ply, veh)
